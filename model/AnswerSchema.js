@@ -10,6 +10,10 @@ const AnswerSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Signup'
     },
+    survey:{
+        type:Schema.Types.ObjectId,
+        ref:'Survey'
+    },
     
     createdAt: {
         type: Date,

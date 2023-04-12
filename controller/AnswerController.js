@@ -4,6 +4,7 @@ exports.addanswers = (req, res) => {
   const newanswers = new questionschema({
     answer: req.body.answer,
     user: req.body.user,
+    survey:req.body.survey
   });
   newanswers
     .save()
@@ -19,7 +20,7 @@ exports.addanswers = (req, res) => {
 exports.getanswers = (req, res) => {
   questionschema
     .find()
-    .populate("user")
+    .populate("user").populate("survey")
     .then((answers) => {
       res.json(answers);
     })
