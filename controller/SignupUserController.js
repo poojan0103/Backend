@@ -59,7 +59,7 @@ exports.verifyUser = async (req, res) => {
       { _id: req.query.id },
       { $set: { is_verified: 1 } }
     );
-    console.log(user);
+  
     res.redirect("http://localhost:4200/login");
   } catch (error) {
     res.status(500).json({
@@ -152,7 +152,7 @@ exports.userProfile = async (req, res, next) => {
 exports.updatepoints = async (req, res) => {
   try {
     let userdata = await SignupSchema.find({ _id: req.body.id });
-    console.log(userdata);
+  
     let user = await singnupSchema.updateOne(
       { _id: req.body.id },
       {
@@ -166,7 +166,7 @@ exports.updatepoints = async (req, res) => {
       message: message.points,
       user,
     });
-    console.log(user);
+    
   } catch (error) {
     res.status(500).json({
       message: message.error,
@@ -178,7 +178,7 @@ exports.updatepoints = async (req, res) => {
 exports.redemPoints = async (req, res) => {
   try {
     let userdata = await singnupSchema.find({ _id: req.body.id });
-    console.log(userdata);
+   
     let user = await singnupSchema.updateOne(
       { _id: req.body.id },
       { $set: { points: 0 } }
@@ -187,7 +187,7 @@ exports.redemPoints = async (req, res) => {
       message: message.points,
       user,
     });
-    console.log(user);
+   
   } catch (error) {
     res.status(500).json({
       message:message.error,

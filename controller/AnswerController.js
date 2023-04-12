@@ -10,11 +10,11 @@ exports.addAnswers = (req, res) => {
     .save()
     .then((answers) => {
       res.json(answers);
-      console.log(answers);
+    
     })
     .catch((err) => {
       res.send("error" + err);
-      console.log(err);
+      
     });
 };
 exports.getAnswers = (req, res) => {
@@ -26,7 +26,7 @@ exports.getAnswers = (req, res) => {
     })
     .catch((err) => {
       res.send("error" + err);
-      console.log(err);
+     
     });
 };
 exports.updateAnswer = (req, res) => {

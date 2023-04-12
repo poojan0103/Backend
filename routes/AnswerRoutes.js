@@ -3,6 +3,6 @@ const express = require('express')
 const router = express.Router()
 
 router.post('/answer',answerController.addAnswers)
-router.get('/answerget',answerController.getAnswers)
+router.get('/answer',answerController.getAnswers)
 router.put('/answer/:id',answerController.updateAnswer)
 module.exports = router
