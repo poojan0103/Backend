@@ -1,7 +1,7 @@
 const { result } = require("lodash");
 const questionschema = require("../model/questionSchema");
 
-exports.addquestion = (req, res) => {
+exports.addQuestion = (req, res) => {
   const question = new questionschema({
     id: req.body.id,
     text: req.body.text,
@@ -21,17 +21,14 @@ exports.addquestion = (req, res) => {
     });
 };
 
-exports.getquestion = (req, res) => {
-  // const surveyid =  mongoose.Types.ObjectId (req.params.survey)
-  //const surveyid = req.params.survey
-  //convert surveyid into objectid
+exports.getQuestion = (req, res) => {
+  
   const surveyid = req.params.survey;
   console.log(surveyid);
   console.log(typeof surveyid);
 
   console.log(typeof surveyid);
-  //genrate a routes for thisd code
-
+  
   questionschema
     .find({ survey: surveyid })
     .populate("survey")

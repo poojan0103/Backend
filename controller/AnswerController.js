@@ -1,6 +1,6 @@
 const questionschema = require("../model/AnswerSchema");
 
-exports.addanswers = (req, res) => {
+exports.addAnswers = (req, res) => {
   const newanswers = new questionschema({
     answer: req.body.answer,
     user: req.body.user,
@@ -17,7 +17,7 @@ exports.addanswers = (req, res) => {
       console.log(err);
     });
 };
-exports.getanswers = (req, res) => {
+exports.getAnswers = (req, res) => {
   questionschema
     .find()
     .populate("user").populate("survey")
@@ -45,18 +45,5 @@ exports.updateAnswer = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send("Error occurred while updating answer: " + err);
-    });
-};
-exports.getanswer = (req, res) => {
-  const answerid = req.params._id;
-  questionschema
-    .find({ _id: answerid })
-    .populate("user")
-    .then((answers) => {
-      res.json(answers);
-    })
-    .catch((err) => {
-      res.send("error" + err);
-      console.log(err);
     });
 };

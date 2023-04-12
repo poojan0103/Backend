@@ -1,40 +1,14 @@
 const singnupSchema = require("../model/SignupSchema");
 const bcrypt = require("../util/Encrypt");
+const message = require("../util/Message")
 const _ = require("lodash");
 const secertkey = "seceretkey";
 const jwt = require("jsonwebtoken");
-const malier = require("nodemailer");
+const Mail = require("../util/Mail")
 const SignupSchema = require("../model/SignupSchema");
 const { body, validationResult } = require("express-validator");
 
-const sendverifyMail = async (name, email, user_id) => {
-  try {
-    const transporter = malier.createTransport({
-      service: "gmail",
-      auth: {
-        user: "",
-        pass: "",
-      },
-    });
-    const mailOptions = {
-      from: "",
-      to: email,
-      subject: "verify your email",
-      text: "verify your email",
-      html: `<h1>Welcome ${name}</h1><p>Please click on the link below to verify your
-            email address</p><p><a href="http://localhost:3000/verify?id=${user_id}">Verify</a></p>`,
-    };
-    transporter.sendMail(mailOptions, function (error, info) {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log("Email sent: " + info.response);
-      }
-    });
-  } catch (error) {
-    console.log(error);
-  }
-};
+
 
 exports.signup = async (req, res) => {
   try {
@@ -58,22 +32,22 @@ exports.signup = async (req, res) => {
     const userExist = await singnupSchema.findOne({ email: email });
     if (userExist) {
       return res.json({
-        message: "User already exist",
+        message:message.alreadyexist,
       });
     }
 
     const userData = await user.save();
     if (userData) {
-      sendverifyMail(userData.name, userData.email, userData._id);
+      Mail.sendverifyMail(userData.name, userData.email, userData._id);
 
       res.status(200).json({
-        message: "User created successfully",
+        message: message.userCreate,
         user: user,
       });
     }
   } catch (error) {
     res.status(500).json({
-      message: "Something went wrong",
+      message: message.error,
       error: error.message,
     });
   }
@@ -89,7 +63,7 @@ exports.verifyUser = async (req, res) => {
     res.redirect("http://localhost:4200/login");
   } catch (error) {
     res.status(500).json({
-      message: "Something went wrong",
+      message: message.error,
       error: error.message,
     });
   }
@@ -101,18 +75,18 @@ exports.login = async (req, res) => {
     const user = await singnupSchema.findOne({ email: email });
     if (!user) {
       return res.json({
-        message: "Invalid email or password",
+        message: message.InvalidPass,
       });
     }
     const isMatch = await bcrypt.comparePassword(password, user.password);
     if (!isMatch) {
       return res.json({
-        message: "Invalid email or password",
+        message: message.InvalidPass,
       });
     }
     if (user.is_verified == 0) {
       return res.json({
-        message: "Please verify your email",
+        message: message.verifyemail,
       });
     }
     const token = jwt.sign(
@@ -123,13 +97,13 @@ exports.login = async (req, res) => {
       { expiresIn: "1h" }
     );
     res.status(200).json({
-      message: "User logged in successfully",
+      message: message.login,
       token: token,
       user: user,
     });
   } catch (error) {
     res.json({
-      message: "Something went wrong",
+      message: message.error,
       error: error.message,
     });
   }
@@ -148,7 +122,7 @@ exports.verifytoken = async (req, res, next) => {
     next();
   } catch (error) {
     res.status(500).json({
-      message: "Something went wrong",
+      message: message.error,
       error: error.message,
     });
   }
@@ -170,7 +144,7 @@ exports.userProfile = async (req, res, next) => {
     });
   } catch (error) {
     res.status(500).json({
-      message: "Something went wrong",
+      message: message.error,
       error: error.message,
     });
   }
@@ -189,13 +163,13 @@ exports.updatepoints = async (req, res) => {
       }
     );
     res.status(200).json({
-      message: "Points updated successfully",
+      message: message.points,
       user,
     });
     console.log(user);
   } catch (error) {
     res.status(500).json({
-      message: "Something went wrong",
+      message: message.error,
       error: error.message,
     });
   }
@@ -210,13 +184,13 @@ exports.redemPoints = async (req, res) => {
       { $set: { points: 0 } }
     );
     res.status(200).json({
-      message: "Points updated successfully",
+      message: message.points,
       user,
     });
     console.log(user);
   } catch (error) {
     res.status(500).json({
-      message: "Something went wrong",
+      message:message.error,
       error: error.message,
     });
   }
