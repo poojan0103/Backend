@@ -15,7 +15,7 @@ exports.signup = async (req, res) => {
     const { name, email, password, gender, phone } = req.body;
 
     let hash = await bcrypt.hashPassword(req.body.password);
-    const user = new singnupSchema({
+    const user =  singnupSchema({
       name,
       email,
       password: hash,
@@ -94,7 +94,7 @@ exports.login = async (req, res) => {
         _id: user._id,
       },
       secertkey,
-      { expiresIn: "1h" }
+      { expiresIn: "2h" }
     );
     res.status(200).json({
       message: message.login,

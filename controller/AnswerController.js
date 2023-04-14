@@ -1,7 +1,7 @@
 const questionschema = require("../model/AnswerSchema");
 
 exports.addAnswers = (req, res) => {
-  const newanswers = new questionschema({
+  const newanswers =  questionschema({
     answer: req.body.answer,
     user: req.body.user,
     survey:req.body.survey

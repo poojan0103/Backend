@@ -19,6 +19,7 @@ const SignupSchema =  Schema({
     },
     gender : {
         type: String,
+       
         required: true
     },
     phone : {
@@ -37,6 +38,7 @@ const SignupSchema =  Schema({
         type: Number,
         default:0
     },
+    
   
  
 })

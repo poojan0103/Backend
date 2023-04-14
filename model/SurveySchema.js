@@ -10,8 +10,8 @@ const surveySchema =  Schema({
     points:{
         type: Number,
         required: true
-    }
-
+    },
     
 })
+  
 module.exports = mongoose.model('Survey', surveySchema)

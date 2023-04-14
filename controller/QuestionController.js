@@ -2,7 +2,7 @@ const { result } = require("lodash");
 const questionschema = require("../model/questionSchema");
 
 exports.addQuestion = (req, res) => {
-  const question = new questionschema({
+  const question =  questionschema({
     id: req.body.id,
     text: req.body.text,
     type: req.body.type,
