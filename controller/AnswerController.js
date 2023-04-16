@@ -19,8 +19,7 @@ exports.addAnswers = (req, res) => {
 };
 exports.getAnswers = (req, res) => {
   questionschema
-    .find()
-    .populate("user").populate("survey")
+    .find().populate("user").populate("survey")
     .then((answers) => {
       res.json(answers);
     })
