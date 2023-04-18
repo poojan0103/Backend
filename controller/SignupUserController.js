@@ -60,7 +60,7 @@ exports.verifyUser = async (req, res) => {
       { $set: { is_verified: 1 } }
     );
   
-    res.redirect("http://localhost:4200/login");
+    res.redirect("http://localhost:4200/verified");
   } catch (error) {
     res.status(500).json({
       message: message.error,
