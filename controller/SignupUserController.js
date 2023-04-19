@@ -11,11 +11,16 @@ const { body, validationResult } = require("express-validator");
 
 
 exports.signup = async (req, res) => {
+let lastid = await singnupSchema.find().sort({ _id: -1 }).limit(1);
+let newid = lastid[0]["userid"] === undefined || lastid[0]["userid"] === 0
+ ? 1
+: lastid[0]["userid"] + 1;
   try {
     const { name, email, password, gender, phone } = req.body;
 
     let hash = await bcrypt.hashPassword(req.body.password);
     const user =  singnupSchema({
+      userid:newid,
       name,
       email,
       password: hash,
@@ -195,3 +200,47 @@ exports.redemPoints = async (req, res) => {
     });
   }
 };
+exports.update = async(req,res)=>{
+  try {
+    
+    let user = await singnupSchema.
+    updateOne({ _id: req.body._id },
+      { $addToSet: {
+        survey:req.body.survey
+      
+      
+      }
+      });
+    res.status(200).json({
+      message:"added",
+      user,
+      
+    });
+    // console.log(user);
+  } catch (error) {
+    res.status(500).json({
+      message: message.error,
+      error: error
+      .message,
+    });
+  }
+}
+
+exports.find = async(req,res)=>{
+  const _id = req.params._id;
+  singnupSchema.find({_id:_id}).populate("survey")
+  .then(data=>{
+    res.send(data)
+    console.log(data)
+})
+.catch(err=>{
+    res.send(err)
+    console.log
+    (err)
+})
+}
+
+  
+
+
+

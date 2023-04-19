@@ -2,6 +2,7 @@ const signupController = require('../controller/SignupUserController')
 const express = require("express")
 var router = express.Router();
 const { body, validationResult } = require('express-validator');
+const SignupSchema = require('../model/SignupSchema');
 
 
 
@@ -16,4 +17,6 @@ router.get('/verify',signupController.verifyUser)
 router.get('/profile',signupController.verifytoken,signupController.userProfile)
 router.post('/points',signupController.updatepoints)
 router.post('/redem',signupController.redemPoints)
+router.post('/update',signupController.update)
+router.get('/get/:_id',signupController.find)
 module.exports = router

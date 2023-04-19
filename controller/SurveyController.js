@@ -62,7 +62,7 @@ exports.updateSurvey = async (req, res) => {
   }
 };
 
-exports.checkSurvey = async(req,res,next) =>{
+exports.checkSurvey = async(req,res) =>{
   try{ 
     const user = req.params.user;
     const survey = req.params.survey;
@@ -86,3 +86,18 @@ exports.checkSurvey = async(req,res,next) =>{
     (err);
   }
 }
+exports.finduser = async(req,res) =>{
+ 
+    const user = req.params.user;
+    answerSchema.find({user:user}).populate("user").populate("survey")
+    .then(data=>{
+      res.send(data)
+      console.log(data)
+  })
+  .catch(err=>{
+      res.send(err)
+      console.log
+      (err)
+  })
+}
+

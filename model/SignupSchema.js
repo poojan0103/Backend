@@ -3,7 +3,9 @@ const Schema = mongoose.Schema;
 
 
 const SignupSchema =  Schema({
-
+    userid:{
+        type:Number
+    },
     name: {
         type: String
         
@@ -38,6 +40,11 @@ const SignupSchema =  Schema({
         type: Number,
         default:0
     },
+    survey:[{
+        type:Schema.Types.ObjectId,
+        ref:'Survey',
+        default:[]
+    }]
     
   
  
