@@ -7,10 +7,14 @@ const jwt = require("jsonwebtoken");
 const Mail = require("../util/Mail")
 const SignupSchema = require("../model/SignupSchema");
 const { body, validationResult } = require("express-validator");
+const cookieParser = require('cookie-parser') 
+
+
 
 
 
 exports.signup = async (req, res) => {
+  
 let lastid = await singnupSchema.find().sort({ _id: -1 }).limit(1);
 let newid = lastid[0]["userid"] === undefined || lastid[0]["userid"] === 0
  ? 1
@@ -101,7 +105,8 @@ exports.login = async (req, res) => {
       secertkey,
       { expiresIn: "2h" }
     );
-    res.status(200).json({
+    // res.cookie(token)
+        res.status(200).json({
       message: message.login,
       token: token,
       user: user,
