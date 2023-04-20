@@ -8,7 +8,7 @@ const signuproutes = require('./routes/SignupRoutes')
 const surveyroutes = require('./routes/SurveyRoues')
 const questionroutes = require('./routes/QuestionRoutes')
 const answerroutes = require('./routes/AnswerRoutes')
-const surveyuserroutes = require('./routes/SurveyUserroutes')
+
 
 const PORT = 3000
 app.use(cors())
@@ -17,7 +17,7 @@ app.use(express.json())
 app.use(answerroutes)
 app.use(signuproutes)
 app.use(surveyroutes)
-app.use(surveyuserroutes)
+
 app.use(questionroutes)
 app.use(bodyParser.urlencoded({
   extended: true
