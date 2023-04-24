@@ -16,16 +16,16 @@ const { response } = require("express");
 
 exports.signup = async (req, res) => {
   
-let lastid = await singnupSchema.find().sort({ _id: -1 }).limit(1);
-let newid = lastid[0]["userid"] === undefined || lastid[0]["userid"] === 0
- ? 1
-: lastid[0]["userid"] + 1;
+// let lastid = await singnupSchema.find().sort({ _id: -1 }).limit(1);
+// let newid = lastid[0]["userid"] === undefined || lastid[0]["userid"] === 0
+//  ? 1
+// : lastid[0]["userid"] + 1;
   try {
     const { name, email, password, gender, phone } = req.body;
 
     let hash = await bcrypt.hashPassword(req.body.password);
     const user =  singnupSchema({
-      userid:newid,
+      // userid:newid,
       name,
       email,
       password: hash,

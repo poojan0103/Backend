@@ -10,7 +10,7 @@ const sendverifyMail = async (name, email, user_id) => {
           pass: process.env.EMAIL_PASSWORD,
         },
       });
-      console.log(transporter);
+    
       const mailOptions = {
         from: "",
         to: email,
