@@ -240,11 +240,11 @@ exports.find = async(req,res)=>{
   singnupSchema.find({_id:_id}).populate("survey")
   .then(data=>{
     res.send(data)
-    console.log(data)
+   
 })
 .catch(err=>{
     res.send(err)
-    console.log
+    
     (err)
 })
 }

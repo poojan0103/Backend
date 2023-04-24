@@ -92,12 +92,11 @@ exports.finduser = async(req,res) =>{
     answerSchema.find({user:user}).populate("user").populate("survey")
     .then(data=>{
       res.send(data)
-      console.log(data)
+    
   })
   .catch(err=>{
       res.send(err)
-      console.log
-      (err)
+    
   })
 }
 
