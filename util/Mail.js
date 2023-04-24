@@ -1,3 +1,4 @@
+require('dotenv').config();
 const malier = require("nodemailer"); 
 
 const sendverifyMail = async (name, email, user_id) => {
@@ -5,10 +6,11 @@ const sendverifyMail = async (name, email, user_id) => {
       const transporter = malier.createTransport({
         service: "gmail",
         auth: {
-          user: "d64810258@gmail.com",
-          pass: "yromarlhqtvmsqfs",
+          user: process.env.EMAIL_USER,
+          pass: process.env.EMAIL_PASSWORD,
         },
       });
+      console.log(transporter);
       const mailOptions = {
         from: "",
         to: email,

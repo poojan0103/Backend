@@ -7,7 +7,8 @@ const jwt = require("jsonwebtoken");
 const Mail = require("../util/Mail")
 const SignupSchema = require("../model/SignupSchema");
 const { body, validationResult } = require("express-validator");
-const cookieParser = require('cookie-parser') 
+const cookieParser = require('cookie-parser'); 
+const { response } = require("express");
 
 
 
@@ -106,7 +107,10 @@ exports.login = async (req, res) => {
       { expiresIn: "2h" }
     );
     // res.cookie(token)
-        res.status(200).json({
+      res.setHeader('set-cookie',`token=${token};HttpOnly;path=/;`);
+     
+
+      res.status(200).json({
       message: message.login,
       token: token,
       user: user,
