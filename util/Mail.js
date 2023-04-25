@@ -17,7 +17,7 @@ const sendverifyMail = async (name, email, user_id) => {
         subject: "verify your email",
         text: "verify your email",
         html: `<h1>Welcome ${name}</h1><p>Please click on the link below to verify your
-              email address</p><p><a href="http://localhost:3000/verify?id=${user_id}">Verify</a></p>`,
+              email address</p><p><a href="https://survey-app-mxek.onrender.com/verify?id=${user_id}">Verify</a></p>`,
       };
       transporter.sendMail(mailOptions, function (error, info) {
         if (error) {

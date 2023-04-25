@@ -70,7 +70,7 @@ exports.verifyUser = async (req, res) => {
       { $set: { is_verified: 1 } }
     );
   
-    res.redirect("http://localhost:4200/verified");
+    res.redirect("https://jovial-parfait-5ddb3f.netlify.app/verified");
   } catch (error) {
     res.status(500).json({
       message: message.error,
