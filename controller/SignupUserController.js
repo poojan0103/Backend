@@ -70,7 +70,7 @@ exports.verifyUser = async (req, res) => {
       { $set: { is_verified: 1 } }
     );
   
-    res.send("<h1>Account is verified Sucessfully !! Go back to login </h1>");
+    res.redirect("https://mysurvey-builder.netlify.app/#/verified");
   } catch (error) {
     res.status(500).json({
       message: message.error,
